@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<time.h>
 #include"../include/list.h"
 
 struct node* new_node(char *artist, char *song, struct node *next) {
@@ -51,6 +52,40 @@ void print_list(struct node *head) {
 		head = head->next;
 	}
 	printf("-----END LIST-----\n\n");
+}
+
+struct node* find_song(struct node *head, char *song) {
+	while (head) {
+		if (!strncmp(head->song, song, strlen(song)+1)) {
+			return head;
+		}
+		head = head->next;
+	}
+	
+	return NULL;
+}
+
+struct node* find_first_song_by_artist(struct node *head, char *artist) {
+	while (head) {
+		if (!strncmp(head->artist, artist, strlen(artist)+1)) {
+			return head;
+		}
+		head = head->next;
+	}
+	
+	return NULL;
+}
+
+struct node* get_random_song(struct node *head) {
+	srand(time(NULL));
+	
+	int targ = rand() % list_len(head) - 1;
+	
+	while (targ--) {
+		head = head->next;
+	}
+	
+	return head;
 }
 
 struct node* free_list(struct node *head) {
