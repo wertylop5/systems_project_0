@@ -1,8 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<strings.h>
 #include<time.h>
 #include"../include/list.h"
+
+//so seed only ges set once
+static char seed_set;
 
 struct node* new_node(char *artist, char *song, struct node *next) {
 	struct node *new = (struct node *)malloc(sizeof(struct node));
@@ -56,7 +60,7 @@ void print_list(struct node *head) {
 
 struct node* find_song(struct node *head, char *song) {
 	while (head) {
-		if (!strncmp(head->song, song, strlen(song)+1)) {
+		if (!strncasecmp(head->song, song, strlen(song)+1)) {
 			return head;
 		}
 		head = head->next;
@@ -67,7 +71,7 @@ struct node* find_song(struct node *head, char *song) {
 
 struct node* find_first_song_by_artist(struct node *head, char *artist) {
 	while (head) {
-		if (!strncmp(head->artist, artist, strlen(artist)+1)) {
+		if (!strncasecmp(head->artist, artist, strlen(artist)+1)) {
 			return head;
 		}
 		head = head->next;
@@ -77,13 +81,36 @@ struct node* find_first_song_by_artist(struct node *head, char *artist) {
 }
 
 struct node* get_random_song(struct node *head) {
-	srand(time(NULL));
+	if (!(seed_set++)) {
+		srand(time(NULL));
+	}
 	
-	int targ = rand() % list_len(head) - 1;
+	int targ = rand() % (list_len(head));
 	
 	while (targ--) {
 		head = head->next;
 	}
+	
+	return head;
+}
+
+struct node* remove_node(struct node *head, int index) {
+	struct node *temp = head;
+	
+	if (!index) {
+		head = temp->next;
+		free(temp);
+		return head;
+	}
+	
+	index--;
+	while(index--) {
+		temp = temp->next;
+	}
+	
+	struct node* temp2 = temp->next->next;
+	free(temp->next);
+	temp->next = temp2;
 	
 	return head;
 }

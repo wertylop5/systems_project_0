@@ -44,6 +44,10 @@ int main() {
 	printf("%lu\n", list_len(list));
 	print_list(list);
 	
+	list = insert_at(list, 0, "Zeroth", "Anotha Zero");
+	printf("%lu\n", list_len(list));
+	print_list(list);
+	
 	printf("~~~~~~~~~~~~~~~~TESTING FIND FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	struct node *temp;
 	
@@ -52,6 +56,42 @@ int main() {
 	
 	temp = find_song(list, "Zero");
 	printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);
+	
+	temp = find_first_song_by_artist(list, "Zeroth");
+	printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);	
+	
+	temp = find_first_song_by_artist(list, "Second");
+	printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);
+	
+	temp = find_first_song_by_artist(list, "sEcOnd");
+	printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);
+	
+	printf("~~~~~~~~~~~~~~~~TESTING GET_RANDOM_SONG~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	int x;
+	for (x = 0; x < 10; x++) {
+		temp = get_random_song(list);
+		printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);
+	}
+	
+	printf("~~~~~~~~~~~~~~~~TESTING REMOVE_NODE~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	printf("original list\n");
+	print_list(list);
+	
+	list = remove_node(list, 0);
+	print_list(list);
+	
+	list = remove_node(list, 4);
+	print_list(list);
+	
+	list = remove_node(list, 3);
+	print_list(list);
+	
+	list = remove_node(list, 1);
+	print_list(list);
+	
+	printf("~~~~~~~~~~~~~~~~TESTING FREE_LIST~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	list = free_list(list);
+	print_list(list);
 	
 	return 0;
 }
