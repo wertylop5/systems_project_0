@@ -30,9 +30,9 @@ void add_song(struct node **lib, char *artist, char *song) {
 		return;
 	}
 	
-	if(!(head[index]->next)) {
-		if (strncasecmp(artist, head[index]->artist, strlen(artist)+1 > 0 ||
-				strncasecmp(song, head[index]->song, strlen(song)+1 > 0) {
+	if(!(lib[index]->next)) {
+		if (strncasecmp(artist, lib[index]->artist, strlen(artist)+1 > 0 ||
+				strncasecmp(song, lib[index]->song, strlen(song)+1 > 0))) {
 			lib[index] = insert_at(lib[index], 1, artist, song);
 		}
 		else {
@@ -45,7 +45,7 @@ void add_song(struct node **lib, char *artist, char *song) {
 	struct node *lo = lib[index];
 	int cmp_res, counter = 1;
 	while(hi) {
-		cmp_res = strncasecomp(artist, hi->artist, strlen(artist)+1);
+		cmp_res = strncasecmp(artist, hi->artist, strlen(artist)+1);
 		
 		if(cmp_res < 0) {
 			lo->next = new_node(artist, song, hi);
@@ -57,7 +57,17 @@ void add_song(struct node **lib, char *artist, char *song) {
 			
 			//now check the songs, use the same procedure
 			while(hi) {
+				cmp_res = strncasecmp(artist, hi->artist, strlen(artist)+1);
+				if (cmp_res > 0) {
+					lo->next = new_node(artist, song, hi);
+					return;
+				}
 				
+				cmp_res = strncasecmp(song, hi->song, strlen(song)+1);
+				if (cmp_res <= 0) {
+					lo->next = new_node(artist, song, hi);
+					return;
+				}
 				
 				lo = lo->next;
 				hi = hi->next;
@@ -69,6 +79,15 @@ void add_song(struct node **lib, char *artist, char *song) {
 	}
 	
 	lo->next = new_node(artist, song, hi);
+}
+
+
+struct node* find_by_song_name_artist(struct node **lib, char *artist, char *song) {
+	
+}
+
+struct node* find_by_artist(struct node **lib, char *artist) {
+	return NULL;
 }
 
 void print_all_by_letter(struct node **lib, char letter) {

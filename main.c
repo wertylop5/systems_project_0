@@ -102,9 +102,15 @@ int main() {
 		library[x] = NULL;
 	}
 	
-	library[0] = new_node("ahh", "song", library[0]);
+	printf("~~~~~~~~~~~~~~~~TESTING ADD_SONG~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	//library[0] = new_node("ahh", "song", library[0]);
 	
 	add_song(library, "ahh", "oh no");
+	add_song(library, "ahh", "song");
+	add_song(library, "aah", "pizza");
+	add_song(library, "billy", "hello");
+	add_song(library, "billy", "bob");
+	add_song(library, "babby", "waaa");
 	
 	print_library(library);
 	
