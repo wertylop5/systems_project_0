@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include"include/list.h"
+#include"include/music_library.h"
 
 int main() {
 	struct node *list = NULL;
@@ -92,6 +93,23 @@ int main() {
 	printf("~~~~~~~~~~~~~~~~TESTING FREE_LIST~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	list = free_list(list);
 	print_list(list);
+	
+	
+	
+	printf("~~~~~~~~~~~~~~~~LIBRARY FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	struct node *library[MUSIC_LIB_LEN];
+	for (x = 0; x < MUSIC_LIB_LEN; x++) {
+		library[x] = NULL;
+	}
+	
+	library[0] = new_node("ahh", "song", library[0]);
+	
+	add_song(library, "ahh", "oh no");
+	
+	print_library(library);
+	
+	
+	
 	
 	return 0;
 }
