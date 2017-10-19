@@ -76,15 +76,19 @@ void shuffle(struct node **lib) {
 		srand(time(NULL));
 		seed_set++;
 	}
+	printf("results of shuffle:\n");
 	
 	int x, lib_pos;
-	struct node *rand_song;
+	struct node *rand_song = NULL;
 	for (x = 0; x < 4; x++) {
-		lib_pos = rand() % MUSIC_LIB_LEN;
-		rand_song = get_random_song(lib[lib_pos]);
+		do {
+			lib_pos = rand() % MUSIC_LIB_LEN;
+			rand_song = get_random_song(lib[lib_pos]);
+		} while (!rand_song);
 		
 		if (rand_song) printf("artist: %s\t\tsong: %s\n", rand_song->artist, rand_song->song);
 	}
+	printf("\n");
 }
 
 void delete_song(struct node **lib, char *artist, char *song) {
@@ -100,8 +104,8 @@ void delete_song(struct node **lib, char *artist, char *song) {
 		}
 		
 		//we know song exists, so safe to assume this
-		while (strncasecmp(temp->next->song, result->song, strlen(temp->song)+1)) temp++;
-		temp = remove_node(temp, 0);
+		while (temp->next != result) temp = temp->next;
+		temp->next = remove_node(temp->next, 0);
 	}
 }
 

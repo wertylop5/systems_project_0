@@ -186,14 +186,37 @@ int main() {
 	
 	
 	printf("~~~~~~~~~~~~~~~~TESTING SHUFFLE~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	//adding songs for the shuffle function
+	add_song(library, "dad", "jokes");
+	add_song(library, "efreet", "it's lit");
+	add_song(library, "freon", "holes");
+	add_song(library, "joker", "funny boi");
+	
+	
 	shuffle(library);
 	shuffle(library);
 	shuffle(library);
 	
 	
+	printf("~~~~~~~~~~~~~~~~TESTING DELETE_SONG~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	print_all_by_letter(library, 'b');
+	delete_song(library, "billy", "hello");
+	print_all_by_letter(library, 'b');
+	
+	delete_song(library, "babby", "hello");
+	print_all_by_letter(library, 'b');
+	
+	delete_song(library, "babby", "waaa");
+	print_all_by_letter(library, 'b');
+	
+	delete_song(library, "billy", "bob");
+	print_all_by_letter(library, 'b');
 	
 	
-	
+	printf("~~~~~~~~~~~~~~~~TESTING DELETE_ALL_SONG~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	print_library(library);
+	delete_all_songs(library);
+	print_library(library);
 	
 	return 0;
 }
