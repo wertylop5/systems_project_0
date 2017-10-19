@@ -1,7 +1,11 @@
 #include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
 #include<string.h>
 #include<strings.h>
 #include"../include/music_library.h"
+
+static char seed_set = 0;
 
 int get_letter_index(char *str) {
 	char thing;
@@ -21,13 +25,19 @@ void add_song(struct node **lib, char *artist, char *song) {
 	lib[index] = insert_order(lib[index], artist, song);
 }
 
-
 struct node* find_by_song_name_artist(struct node **lib, char *artist, char *song) {
+	struct node *result = find_by_artist(lib, artist);
+	result = find_song(result, song);
 	
+	if (result && !strncasecmp(artist, result->artist, strlen(artist)+1)) {
+		return result;
+	}
+	return NULL;
 }
 
 struct node* find_by_artist(struct node **lib, char *artist) {
-	return NULL;
+	int index = get_letter_index(artist);
+	return find_first_song_by_artist(lib[index], artist);
 }
 
 void print_all_by_letter(struct node **lib, char letter) {
@@ -37,6 +47,19 @@ void print_all_by_letter(struct node **lib, char letter) {
 	print_list(lib[index]);
 }
 
+void print_all_by_artist(struct node **lib, char *artist) {
+	struct node *result = find_by_artist(lib, artist);
+	if (!artist) {
+		printf("artist %s not found\n", artist);
+	}
+	else {
+		printf("printing songs for artist %s\n", artist);
+		while (result && !strncasecmp(artist, result->artist, strlen(artist)+1)) {
+			printf("artist: %s\t\tsong: %s\n", result->artist, result->song);
+			result = result->next;
+		}
+	}
+}
 
 void print_library(struct node **lib) {
 	int x;
@@ -47,6 +70,39 @@ void print_library(struct node **lib) {
 	
 }
 
+void shuffle(struct node **lib) {
+	if (!seed_set) {
+		srand(time(NULL));
+		seed_set++;
+	}
+	
+	int x, y, lib_pos;
+	struct node *rand_song;
+	for (x = 0; x < 4; x++) {
+		lib_pos = rand() % MUSIC_LIB_LEN;
+		rand_song = get_random_song(lib[lib_pos]);
+		
+		printf("artist: %s\t\tsong: %s\n", rand_song->artist, rand_song->song);
+	}
+}
+
+void delete_song(struct node **lib, char *artist, char *song) {
+	int index = get_letter_index(artist);
+	struct node *result = find_by_song_name_artist(lib, artist, song);
+	
+	if (result) {
+		struct node *temp = lib[index];
+		
+		if (!strncasecmp(temp->song, result->song, strlen(temp->song)+1)) {
+			lib[index] = remove_node(lib[index], 0);
+			return;
+		}
+		
+		//we know song exists, so safe to assume this
+		while (strncasecmp(temp->next->song, result->song, strlen(temp->song)+1)) temp++;
+		temp = remove_node(temp, 0);
+	}
+}
 
 void delete_all_songs(struct node **lib) {
 	int x;

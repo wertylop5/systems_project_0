@@ -146,6 +146,32 @@ int main() {
 	print_library(library);
 	
 	
+	printf("~~~~~~~~~~~~~~~~TESTING FIND_BY_ARTIST~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	temp = find_by_artist(library, "ahh");
+	print_list(temp);
+	
+	temp = find_by_artist(library, "BabbY");
+	print_list(temp);
+	
+	temp = find_by_artist(library, "chuck");
+	print_list(temp);
+	
+	
+	printf("~~~~~~~~~~~~~~~~TESTING FIND_BY_SONG_NAME_ARTIST~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	temp = find_by_song_name_artist(library, "ahh", "oh no");
+	print_list(temp);
+	
+	temp = find_by_song_name_artist(library, "billy", "bob");
+	print_list(temp);
+	
+	temp = find_by_song_name_artist(library, "chuck", "fun");
+	print_list(temp);
+	
+	temp = find_by_song_name_artist(library, "billy", "fun");
+	print_list(temp);
+	
+	
+	
 	
 	
 	return 0;

@@ -151,8 +151,9 @@ struct node* find_first_song_by_artist(struct node *head, char *artist) {
 }
 
 struct node* get_random_song(struct node *head) {
-	if (!(seed_set++)) {
+	if (!seed_set) {
 		srand(time(NULL));
+		seed_set++;
 	}
 	
 	int targ = rand() % (list_len(head));
