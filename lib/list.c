@@ -6,7 +6,7 @@
 #include"../include/list.h"
 
 //so seed only ges set once
-static char seed_set;
+static char seed_set = 0;
 
 struct node* new_node(char *artist, char *song, struct node *next) {
 	struct node *new = (struct node *)malloc(sizeof(struct node));
