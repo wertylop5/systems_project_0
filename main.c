@@ -187,6 +187,8 @@ int main() {
 	
 	printf("~~~~~~~~~~~~~~~~TESTING SHUFFLE~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	shuffle(library);
+	shuffle(library);
+	shuffle(library);
 	
 	
 	
