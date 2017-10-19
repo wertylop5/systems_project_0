@@ -24,6 +24,7 @@ int main() {
 	printf("%lu\n", list_len(list));
 	print_list(list);
 	
+	/*
 	printf("~~~~~~~~~~~~~~~~TESTING INSERT_AT~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	list = insert_at(list, 0, "First", "One");
 	printf("%lu\n", list_len(list));
@@ -46,6 +47,36 @@ int main() {
 	print_list(list);
 	
 	list = insert_at(list, 0, "Zeroth", "Anotha Zero");
+	printf("%lu\n", list_len(list));
+	print_list(list);
+	*/
+	
+	printf("~~~~~~~~~~~~~~~~TESTING INSERT_ORDER~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	list = insert_order(list, "First", "One");
+	printf("%lu\n", list_len(list));
+	print_list(list);
+	
+	list = insert_order(list, "Second", "Two");
+	printf("%lu\n", list_len(list));
+	print_list(list);
+	
+	list = insert_order(list, "Zeroth", "Zero");
+	printf("%lu\n", list_len(list));
+	print_list(list);
+	
+	list = insert_order(list, "1.5th", "1.5");
+	printf("%lu\n", list_len(list));
+	print_list(list);
+	
+	list = insert_order(list, "secoNd", "A Two");
+	printf("%lu\n", list_len(list));
+	print_list(list);
+	
+	list = insert_order(list, "secoNd", "ZTwo");
+	printf("%lu\n", list_len(list));
+	print_list(list);
+	
+	list = insert_order(list, "Zeroth", "ZZZero");
 	printf("%lu\n", list_len(list));
 	print_list(list);
 	
@@ -108,9 +139,9 @@ int main() {
 	add_song(library, "ahh", "oh no");
 	add_song(library, "ahh", "song");
 	add_song(library, "aah", "pizza");
-	add_song(library, "billy", "hello");
 	add_song(library, "billy", "bob");
 	add_song(library, "babby", "waaa");
+	add_song(library, "billy", "hello");
 	
 	print_library(library);
 	

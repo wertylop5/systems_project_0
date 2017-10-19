@@ -49,6 +49,76 @@ struct node* insert_at(struct node *head, int index, char *artist, char *song) {
 	return head;
 }
 
+struct node* insert_order(struct node *head, char *artist, char *song) {
+	if (!head || strncasecmp(artist, head->artist, strlen(artist)+1) < 0) {
+		head = insert_front(head, artist, song);
+		return head;
+	}
+	else if (!strncasecmp(artist, head->artist, strlen(artist)+1)) {
+		if (strncasecmp(song, head->song, strlen(song)+1) <= 0) {
+			head = insert_front(head, artist, song);
+		}
+		return head;
+	}
+	
+	if(!(head->next)) {
+		if (strncasecmp(artist, head->artist, strlen(artist)+1 > 0 ||
+				strncasecmp(song, head->song, strlen(song)+1 > 0))) {
+			head = insert_at(head, 1, artist, song);
+		}
+		else {
+			head = insert_front(head, artist, song);
+		}
+		return head;
+	}
+	
+	struct node *hi = head->next;
+	struct node *lo = head;
+	int cmp_res, counter = 1;
+	while(hi) {
+		cmp_res = strncasecmp(artist, hi->artist, strlen(artist)+1);
+		
+		if(cmp_res < 0) {
+			lo->next = new_node(artist, song, hi);
+			return head;
+		}
+		else if (cmp_res == 0) {
+			//now check the songs, use the same procedure
+			while(hi) {
+				cmp_res = strncasecmp(artist, hi->artist, strlen(artist)+1);
+				
+				//if no more of the same artist
+				if (cmp_res < 0) {
+					lo->next = new_node(artist, song, hi);
+					return head;
+				}
+				
+				cmp_res = strncasecmp(song, hi->song, strlen(song)+1);
+				
+				//found the spot
+				if (cmp_res <= 0) {
+					lo->next = new_node(artist, song, hi);
+					return head;
+				}
+				
+				lo = lo->next;
+				hi = hi->next;
+			}
+			
+			//reached end of list
+			lo->next = new_node(artist, song, lo->next);
+			return head;
+		}
+		
+		lo = lo->next;
+		hi = hi->next;
+	}
+	
+	//reached end of list
+	lo->next = new_node(artist, song, hi);
+	return head;
+}
+
 void print_list(struct node *head) {
 	printf("-----BEGIN LIST-----\n");
 	while (head) {

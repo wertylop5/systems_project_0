@@ -21,6 +21,7 @@ Inserts the node at the specified index
 This means whatever was originally at that index will be pushed forward
 */
 struct node* insert_at(struct node *head, int index, char *artist, char *song);
+struct node* insert_order(struct node *head, char *artist, char *song);
 
 void print_list(struct node *list);
 

@@ -18,67 +18,7 @@ int get_letter_index(char *str) {
 
 void add_song(struct node **lib, char *artist, char *song) {
 	int index = get_letter_index(artist);
-	
-	if (!lib[index] || strncasecmp(artist, lib[index]->artist, strlen(artist)+1) < 0) {
-		lib[index] = insert_front(lib[index], artist, song);
-		return;
-	}
-	else if (!strncasecmp(artist, lib[index]->artist, strlen(artist)+1)) {
-		if (strncasecmp(song, lib[index]->song, strlen(song)+1) <= 0) {
-			lib[index] = insert_front(lib[index], artist, song);
-		}
-		return;
-	}
-	
-	if(!(lib[index]->next)) {
-		if (strncasecmp(artist, lib[index]->artist, strlen(artist)+1 > 0 ||
-				strncasecmp(song, lib[index]->song, strlen(song)+1 > 0))) {
-			lib[index] = insert_at(lib[index], 1, artist, song);
-		}
-		else {
-			lib[index] = insert_front(lib[index], artist, song);
-		}
-		return;
-	}
-	
-	struct node *hi = lib[index]->next;
-	struct node *lo = lib[index];
-	int cmp_res, counter = 1;
-	while(hi) {
-		cmp_res = strncasecmp(artist, hi->artist, strlen(artist)+1);
-		
-		if(cmp_res < 0) {
-			lo->next = new_node(artist, song, hi);
-			return;
-		}
-		else if (cmp_res == 0) {
-			lo = hi;
-			hi = hi->next;
-			
-			//now check the songs, use the same procedure
-			while(hi) {
-				cmp_res = strncasecmp(artist, hi->artist, strlen(artist)+1);
-				if (cmp_res > 0) {
-					lo->next = new_node(artist, song, hi);
-					return;
-				}
-				
-				cmp_res = strncasecmp(song, hi->song, strlen(song)+1);
-				if (cmp_res <= 0) {
-					lo->next = new_node(artist, song, hi);
-					return;
-				}
-				
-				lo = lo->next;
-				hi = hi->next;
-			}
-		}
-		
-		lo = lo->next;
-		hi = hi->next;
-	}
-	
-	lo->next = new_node(artist, song, hi);
+	lib[index] = insert_order(lib[index], artist, song);
 }
 
 
