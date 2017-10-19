@@ -143,6 +143,8 @@ int main() {
 	add_song(library, "babby", "waaa");
 	add_song(library, "billy", "hello");
 	
+	
+	printf("~~~~~~~~~~~~~~~~TESTING PRINT_LIBRARY~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	print_library(library);
 	
 	
@@ -169,6 +171,23 @@ int main() {
 	
 	temp = find_by_song_name_artist(library, "billy", "fun");
 	print_list(temp);
+	
+	
+	printf("~~~~~~~~~~~~~~~~TESTING PRINT_ALL_BY_LETTER~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	print_all_by_letter(library, 'a');
+	print_all_by_letter(library, 'B');
+	print_all_by_letter(library, 'x');
+	
+	
+	printf("~~~~~~~~~~~~~~~~TESTING PRINT_ALL_BY_ARTIST~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	print_all_by_artist(library, "billy");
+	print_all_by_artist(library, "babby");
+	print_all_by_artist(library, "DNE");
+	
+	
+	printf("~~~~~~~~~~~~~~~~TESTING SHUFFLE~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	shuffle(library);
+	
 	
 	
 	

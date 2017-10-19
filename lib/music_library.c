@@ -49,7 +49,7 @@ void print_all_by_letter(struct node **lib, char letter) {
 
 void print_all_by_artist(struct node **lib, char *artist) {
 	struct node *result = find_by_artist(lib, artist);
-	if (!artist) {
+	if (!result) {
 		printf("artist %s not found\n", artist);
 	}
 	else {
@@ -59,6 +59,7 @@ void print_all_by_artist(struct node **lib, char *artist) {
 			result = result->next;
 		}
 	}
+	printf("\n");
 }
 
 void print_library(struct node **lib) {
@@ -76,13 +77,13 @@ void shuffle(struct node **lib) {
 		seed_set++;
 	}
 	
-	int x, y, lib_pos;
+	int x, lib_pos;
 	struct node *rand_song;
 	for (x = 0; x < 4; x++) {
 		lib_pos = rand() % MUSIC_LIB_LEN;
 		rand_song = get_random_song(lib[lib_pos]);
 		
-		printf("artist: %s\t\tsong: %s\n", rand_song->artist, rand_song->song);
+		if (rand_song) printf("artist: %s\t\tsong: %s\n", rand_song->artist, rand_song->song);
 	}
 }
 

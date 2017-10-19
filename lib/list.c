@@ -5,7 +5,7 @@
 #include<time.h>
 #include"../include/list.h"
 
-//so seed only ges set once
+//so seed only gets set once
 static char seed_set = 0;
 
 struct node* new_node(char *artist, char *song, struct node *next) {
@@ -154,6 +154,10 @@ struct node* get_random_song(struct node *head) {
 	if (!seed_set) {
 		srand(time(NULL));
 		seed_set++;
+	}
+	
+	if (!head) {
+		return NULL;
 	}
 	
 	int targ = rand() % (list_len(head));
