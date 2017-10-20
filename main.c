@@ -84,19 +84,19 @@ int main() {
 	struct node *temp;
 	
 	temp = find_song(list, "1.5");
-	printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);
+	printf("artist: %s\t\tsong: %s\n\n", temp->artist, temp->song);
 	
 	temp = find_song(list, "Zero");
-	printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);
+	printf("artist: %s\t\tsong: %s\n\n", temp->artist, temp->song);
 	
 	temp = find_first_song_by_artist(list, "Zeroth");
-	printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);	
+	printf("artist: %s\t\tsong: %s\n\n", temp->artist, temp->song);	
 	
 	temp = find_first_song_by_artist(list, "Second");
-	printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);
+	printf("artist: %s\t\tsong: %s\n\n", temp->artist, temp->song);
 	
 	temp = find_first_song_by_artist(list, "sEcOnd");
-	printf("artist: %s\t\tsong: %s\n", temp->artist, temp->song);
+	printf("artist: %s\t\tsong: %s\n\n", temp->artist, temp->song);
 	
 	printf("~~~~~~~~~~~~~~~~TESTING GET_RANDOM_SONG~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	int x;
@@ -109,15 +109,19 @@ int main() {
 	printf("original list\n");
 	print_list(list);
 	
+	printf("removing from %d\n", 0);
 	list = remove_node(list, 0);
 	print_list(list);
 	
+	printf("removing from %d\n", 4);
 	list = remove_node(list, 4);
 	print_list(list);
 	
+	printf("removing from %d\n", 3);
 	list = remove_node(list, 3);
 	print_list(list);
 	
+	printf("removing from %d\n", 1);
 	list = remove_node(list, 1);
 	print_list(list);
 	
@@ -136,12 +140,29 @@ int main() {
 	printf("~~~~~~~~~~~~~~~~TESTING ADD_SONG~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	//library[0] = new_node("ahh", "song", library[0]);
 	
+	printf("adding song to library artist: %s, song: %s\n", "ahh", "oh no");
 	add_song(library, "ahh", "oh no");
+	printf("\n");
+	
+	printf("adding song to library artist: %s, song: %s\n", "ahh", "song");
 	add_song(library, "ahh", "song");
+	printf("\n");
+	
+	printf("adding song to library artist: %s, song: %s\n", "ahh", "pizza");
 	add_song(library, "aah", "pizza");
+	printf("\n");
+	
+	printf("adding song to library artist: %s, song: %s\n", "billy", "bob");
 	add_song(library, "billy", "bob");
+	printf("\n");
+	
+	printf("adding song to library artist: %s, song: %s\n", "babby", "waaa");
 	add_song(library, "babby", "waaa");
+	printf("\n");
+	
+	printf("adding song to library artist: %s, song: %s\n", "billy", "hello");
 	add_song(library, "billy", "hello");
+	printf("\n");
 	
 	
 	printf("~~~~~~~~~~~~~~~~TESTING PRINT_LIBRARY~~~~~~~~~~~~~~~~~~~~~~~~~\n");
@@ -187,6 +208,7 @@ int main() {
 	
 	printf("~~~~~~~~~~~~~~~~TESTING SHUFFLE~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	//adding songs for the shuffle function
+	printf("adding more songs to improve shuffle chances\n");
 	add_song(library, "dad", "jokes");
 	add_song(library, "efreet", "it's lit");
 	add_song(library, "freon", "holes");
@@ -203,7 +225,7 @@ int main() {
 	delete_song(library, "billy", "hello");
 	print_all_by_letter(library, 'b');
 	
-	delete_song(library, "babby", "hello");
+	delete_song(library, "babby", "lmao");
 	print_all_by_letter(library, 'b');
 	
 	delete_song(library, "babby", "waaa");
@@ -214,7 +236,6 @@ int main() {
 	
 	
 	printf("~~~~~~~~~~~~~~~~TESTING DELETE_ALL_SONG~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-	print_library(library);
 	delete_all_songs(library);
 	print_library(library);
 	

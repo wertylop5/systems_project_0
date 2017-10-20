@@ -21,7 +21,6 @@ int get_letter_index(char *str) {
 }
 
 void add_song(struct node **lib, char *artist, char *song) {
-	printf("adding song to library artist: %s, song: %s\n", artist, song);
 	int index = get_letter_index(artist);
 	lib[index] = insert_order(lib[index], artist, song);
 }
