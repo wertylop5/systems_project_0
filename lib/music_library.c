@@ -21,11 +21,13 @@ int get_letter_index(char *str) {
 }
 
 void add_song(struct node **lib, char *artist, char *song) {
+	printf("adding song to library artist: %s, song: %s\n", artist, song);
 	int index = get_letter_index(artist);
 	lib[index] = insert_order(lib[index], artist, song);
 }
 
 struct node* find_by_song_name_artist(struct node **lib, char *artist, char *song) {
+	printf("finding by song name and artist (artist: %s, song: %s)\n", artist, song);
 	struct node *result = find_by_artist(lib, artist);
 	result = find_song(result, song);
 	
@@ -36,6 +38,7 @@ struct node* find_by_song_name_artist(struct node **lib, char *artist, char *son
 }
 
 struct node* find_by_artist(struct node **lib, char *artist) {
+	printf("finding by artist: %s\n", artist);
 	int index = get_letter_index(artist);
 	return find_first_song_by_artist(lib[index], artist);
 }
@@ -92,6 +95,7 @@ void shuffle(struct node **lib) {
 }
 
 void delete_song(struct node **lib, char *artist, char *song) {
+	printf("deleting song: %s\n", song);
 	int index = get_letter_index(artist);
 	struct node *result = find_by_song_name_artist(lib, artist, song);
 	
@@ -110,6 +114,7 @@ void delete_song(struct node **lib, char *artist, char *song) {
 }
 
 void delete_all_songs(struct node **lib) {
+	printf("deleting all songs from library");
 	int x;
 	for (x = 0; x < MUSIC_LIB_LEN; x++) {
 		lib[x] = free_list(lib[x]);

@@ -29,6 +29,7 @@ size_t list_len(struct node *head) {
 }
 
 struct node* insert_front(struct node *head, char *artist, char *song) {
+	printf("inserting at front artist: %s, song: %s\n", artist, song);
 	return new_node(artist, song, head);
 }
 
@@ -50,6 +51,7 @@ struct node* insert_at(struct node *head, int index, char *artist, char *song) {
 }
 
 struct node* insert_order(struct node *head, char *artist, char *song) {
+	printf("inserting in order artist: %s, song: %s\n", artist, song);
 	if (!head || strncasecmp(artist, head->artist, strlen(artist)+1) < 0) {
 		head = insert_front(head, artist, song);
 		return head;
@@ -129,6 +131,7 @@ void print_list(struct node *head) {
 }
 
 struct node* find_song(struct node *head, char *song) {
+	printf("finding song: %s\n", song);
 	while (head) {
 		if (!strncasecmp(head->song, song, strlen(song)+1)) {
 			return head;
@@ -140,6 +143,7 @@ struct node* find_song(struct node *head, char *song) {
 }
 
 struct node* find_first_song_by_artist(struct node *head, char *artist) {
+	printf("finding first song by artist: %s\n", artist);
 	while (head) {
 		if (!strncasecmp(head->artist, artist, strlen(artist)+1)) {
 			return head;
